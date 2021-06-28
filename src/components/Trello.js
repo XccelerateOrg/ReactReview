@@ -59,6 +59,7 @@ const Trello = () => {
   };
 
   // toggle to do
+  // this is the button that allows you to toggle the card to the to do column
   const toggleToDo = (id) => {
     const card = cards.find((card) => card.id === id);
     console.log(card);
@@ -71,6 +72,7 @@ const Trello = () => {
   };
 
   // toggle doing
+  // this is the button that allows you to toggle the card to the doing column
   const toggleDoing = (id) => {
     const card = cards.find((card) => card.id === id);
     console.log(card);
@@ -81,9 +83,11 @@ const Trello = () => {
     );
   };
   // toggle done
+  // this is the button that allows you to toggle the card to the done column
   const toggleDone = (id) => {
     const card = cards.find((card) => card.id === id);
     console.log(card);
+    // after changing the card, you would map that back out
     const changedCard = { ...card, completed: DONE };
     console.log(changedCard);
     setCards(
@@ -92,12 +96,15 @@ const Trello = () => {
   };
 
   // to do rows
-  const showToDo = showAll
-    ? cards.filter((card) => card.completed === TODO)
-    : cards.filter((card) => card.id === 3423423);
+  // grab all the cards that have the completed to do
 
+  const toDoCards = cards.filter(
+    (card) => card.completed === TODO
+  );
+
+  // map each of thos cards out
   const toDoRows = () =>
-    showToDo.map((card) => (
+    toDoCards.map((card) => (
       <Card
         key={card.id}
         handleDelete={() => handleDelete(card.id)}
@@ -109,9 +116,10 @@ const Trello = () => {
     ));
 
   // doing rows
-  const showDoing = showAll
-    ? cards.filter((card) => card.completed === DOING)
-    : cards.filter((card) => card.id === 3423423);
+  // grab the cards that have all
+  const showDoing = cards.filter(
+    (card) => card.completed === DOING
+  );
 
   const doingRows = () =>
     showDoing.map((card) => (
@@ -126,9 +134,9 @@ const Trello = () => {
     ));
 
   // done rows
-  const showDone = showAll
-    ? cards.filter((card) => card.completed === DONE)
-    : cards.filter((card) => card.id === 3423423);
+  const showDone = cards.filter(
+    (card) => card.completed === DONE
+  );
   const doneRows = () =>
     showDone.map((card) => (
       <Card
